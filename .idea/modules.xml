@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/My-Education-Role-Playing-Game.iml" filepath="$PROJECT_DIR$/My-Education-Role-Playing-Game.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Unit-classes/Unit-classes.iml" filepath="$PROJECT_DIR$/Unit-classes/Unit-classes.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Unit-interfaces/Unit-interfaces.iml" filepath="$PROJECT_DIR$/Unit-interfaces/Unit-interfaces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MyEducationRolePlayingGame.iml" filepath="$PROJECT_DIR$/MyEducationRolePlayingGame.iml" />
     </modules>
   </component>
 </project>
