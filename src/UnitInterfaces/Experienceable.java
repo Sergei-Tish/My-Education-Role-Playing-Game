@@ -1,9 +1,8 @@
 package UnitInterfaces;
 
-public interface Experienceable {
+public interface Experienceable extends Levelable {
 
-    int currentExp();
-    default int takeExp(int howMuchExp) {
-        return currentExp() + howMuchExp;
-    }
+    int getCurrentExp();
+    int getRequiredExp();
+    void takeExp(int howMuchExp);
 }

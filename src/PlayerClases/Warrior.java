@@ -1,30 +1,18 @@
 package PlayerClases;
 
+import MainClassesAndOther.PlayerUnit;
 import UnitInterfaces.GoldInterface;
 
-public class Warrior implements GoldInterface {
-    String className = "Warrior";
-    private int gold = 0;
+public class Warrior extends PlayerUnit {
+    private String className = "Warrior";
 
-    @Override
-    public void minusGold(int howMuch) {
-        gold = getGold() - howMuch;
-    }
-
-    @Override
-    public void plusGold(int howMuch) {
-        gold = getGold() + howMuch;
-    }
-
-
-    @Override
-    public int getGold() {
-        return gold;
+    public String getClassName() {
+        return className;
     }
 
     @Override
     public String toString() {
-        return "I'm a " + className;
+        return "I'm a \"" + getName() + "\" level " + getLevel() + " " + getClassName();
     }
 }
 

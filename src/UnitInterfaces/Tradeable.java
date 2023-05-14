@@ -1,5 +1,5 @@
 package UnitInterfaces;
 
 public interface Tradeable {
-    void trade();
+    void trade(Tradeable tradeTarget);
 }
