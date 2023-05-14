@@ -5,7 +5,7 @@ import UnitInterfaces.HPInterface;
 
 public class FighterUnit extends Unit implements HPInterface, Fightable {
     @Override
-    public void fight(Fightable enemy) {
+    public void startFight(Fightable enemy) {
 
     }
 

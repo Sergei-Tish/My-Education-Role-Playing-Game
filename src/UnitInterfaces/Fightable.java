@@ -1,5 +1,11 @@
 package UnitInterfaces;
 
 public interface Fightable {
-    void fight(Fightable enemy);
+    void startFight(Fightable enemy);
+    int getHitDamage();
+    default int getHitChance() {
+
+    }
+    int getStrange();
+    int getAgility();
 }

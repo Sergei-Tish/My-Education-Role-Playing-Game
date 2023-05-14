@@ -19,7 +19,7 @@ public abstract class PlayerUnit
     @Override
     public void lvlUp() {
         if (level != 1) {
-            takeExp( expForLvl(level) );
+            takeExp(expForLvl(level));
         } else takeExp(100);
     }
 
@@ -30,19 +30,24 @@ public abstract class PlayerUnit
         for (int i = 1; i < atLevel; i++) {
             result = result * 3 / 2;
         }
-
         return result;
     }
-    private int expForLvl(int atLevel, int howMany) { // если будем выдавать сразу высокий уровень
-        int result = 0;
-        for (int i = 0; i < howMany; i++) {
-            result += expForLvl(i);
+
+    private int expForLvl(int atLevel, char ch) { // если будем выдавать сразу высокий уровень
+        if (atLevel < 4) {
+            int result = 0;
+            for (int i = 0; i < atLevel; i++) {
+                result += expForLvl(i);
+            }
+            return result;
+        } else {
+            return (int) (expForLvl(atLevel - 1) + (expForLvl(atLevel - 1) - expForLvl(atLevel - 2)) * 1.5);
+
         }
-        return result;
     }
 
 
-    private int requiredExp = level == 1 ? 100 : expForLvl(level, level);
+    private int requiredExp = level == 1 ? 100 : expForLvl(level, 'a');
 
     @Override
     public int getCurrentExp() {
