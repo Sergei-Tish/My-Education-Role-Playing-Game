@@ -1,9 +1,6 @@
 package MainClassesAndOther;
 
-import UnitInterfaces.Fightable;
-import UnitInterfaces.HPInterface;
-
-public abstract class MonsterUnit extends FighterUnit implements Fightable, HPInterface {
+public abstract class MonsterUnit extends FighterUnit {
     private int Level = 1;
 
 }

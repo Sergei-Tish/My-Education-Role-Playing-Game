@@ -40,7 +40,7 @@ public abstract class Unit implements GoldInterface, Levelable {
 
     @Override
     public String toString() {
-        return "I'm a " + className;
+        return "I'm a " + getClassName();
     }
 
     public String getClassName() {

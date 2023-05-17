@@ -8,6 +8,8 @@ public abstract class PlayerUnit
 
     String name = "Unnamed player hero";
     String className = "PlayerUnit";
+    int strength = 8;
+    int agility = 8;
 
     private int level = 1;
 
@@ -18,9 +20,8 @@ public abstract class PlayerUnit
 
     @Override
     public void lvlUp() {
-        if (level != 1) {
-            takeExp(expForLvl(level));
-        } else takeExp(100);
+        if (level != 1) takeExp(expForLvl(level));
+        else takeExp(100);
     }
 
     private int currentExp = 0;
