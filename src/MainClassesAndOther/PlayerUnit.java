@@ -11,6 +11,15 @@ public abstract class PlayerUnit
     int strength = 8;
     int agility = 8;
 
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
     private int level = 1;
 
     @Override
@@ -76,15 +85,4 @@ public abstract class PlayerUnit
             requiredExp += expForLvl(level);
         }
     }
-
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public String getClassName() {
-        return className;
-    }
-
 }

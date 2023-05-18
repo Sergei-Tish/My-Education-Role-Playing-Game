@@ -14,11 +14,11 @@ public class Warrior extends PlayerUnit {
     private int currentHP = getMaxHP();
 
 
-    public Warrior(String name, int strangeBonus, int agilityBonus) {
+    public Warrior(String name, int strength, int agility) {
         this.name = name;
-        this.strength += 4 + strangeBonus;
-        this.agility += 2 + agilityBonus;
-        this.maxHP = 50 + ((strangeBonus + 4) * 5);
+        this.strength = strength;
+        this.agility = agility;
+        this.maxHP = 50 + ((this.strength - 8) * 5);
     }
 
     @Override
@@ -32,12 +32,21 @@ public class Warrior extends PlayerUnit {
 
     @Override
     public String toString() {
-        return "\"" + getName() + "\" level " + getLevel() + " " + getClassName();
+        return "\"" + getName() + "\" the " + getClassName() + " at level " + getLevel();
     }
 
     @Override
     public void startFight(Fightable enemy) {
 
+    }
+    public void printCharInfo() {
+        System.out.println(
+                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+                        "Strength = " + getStrength() + ".\n" +
+                        "Agility = " + getAgility() + ".\n" +
+                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
+        );
     }
 
     @Override
@@ -58,8 +67,8 @@ public class Warrior extends PlayerUnit {
     }
 
     @Override
-    public void takeDamage() {
-
+    public void takeDamage(int damage) {
+        currentHP -= damage;
     }
 }
 
