@@ -2,14 +2,20 @@ package MainClassesAndOther;
 
 import UnitInterfaces.*;
 
+import java.util.Random;
+
 public abstract class PlayerUnit
         extends FighterUnit
         implements Playerable, Experienceable, Nameable {
 
-    String name = "Unnamed player hero";
+    String name = "Player";
     String className = "PlayerUnit";
-    int strength = 8;
-    int agility = 8;
+    private int strength = 8;
+    private int agility = 8;
+    private int intelligence = 8;
+    private int wisdom = 8;
+    private int maxHP;
+    private int currentHP = getMaxHP();
 
     @Override
     public String getName() {
@@ -23,14 +29,96 @@ public abstract class PlayerUnit
     private int level = 1;
 
     @Override
+    public int getGold() {
+        return super.getGold();
+    }
+
+    @Override
+    public void minusGold(int howMuch) {
+        super.minusGold(howMuch);
+    }
+
+    @Override
+    public void plusGold(int howMuch) {
+        super.plusGold(howMuch);
+    }
+
+    @Override
+    public int getHitDamage() {
+        return super.getHitDamage();
+    }
+
+    @Override
+    public int getStrength() {
+        return strength;
+    }
+
+    @Override
+    public int getAgility() {
+        return agility;
+    }
+
+    @Override
+    public boolean getHitOrMiss() {
+        return super.getHitOrMiss();
+    }
+
+    @Override
+    public boolean getHitOrMiss(int intBuffOrNerfChance) {
+        return super.getHitOrMiss(intBuffOrNerfChance);
+    }
+
+    @Override
+    public boolean playerCharacter() {
+        return Playerable.super.playerCharacter();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+    @Override
+    public int getMaxHP() {
+        return 0;
+    }
+
+    @Override
+    public int getCurrentHP() {
+        return 0;
+    }
+
+    @Override
+    public void takeDamage(int damage) {
+
+    }
+
+    @Override
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public void lvlUp(int numberOfLevel) {
+        super.lvlUp(numberOfLevel);
+        increaseCharacteristicFroLvlUp();
     }
 
     @Override
     public void lvlUp() {
         if (level != 1) takeExp(expForLvl(level));
         else takeExp(100);
+        increaseCharacteristicFroLvlUp();
     }
 
     private int currentExp = 0;
@@ -43,21 +131,17 @@ public abstract class PlayerUnit
         return result;
     }
 
-    private int expForLvl(int atLevel, char ch) { // если будем выдавать сразу высокий уровень
+    private int expForLvl(int atLevel, int atLevel1) { // если будем выдавать сразу высокий уровень
         if (atLevel < 4) {
             int result = 0;
-            for (int i = 0; i < atLevel; i++) {
-                result += expForLvl(i);
-            }
+            for (int i = 0; i < atLevel; i++) result += expForLvl(i);
             return result;
         } else {
             return (int) (expForLvl(atLevel - 1) + (expForLvl(atLevel - 1) - expForLvl(atLevel - 2)) * 1.5);
-
         }
     }
 
-
-    private int requiredExp = level == 1 ? 100 : expForLvl(level, 'a');
+    private int requiredExp = level == 1 ? 100 : expForLvl(level, level);
 
     @Override
     public int getCurrentExp() {
@@ -69,20 +153,47 @@ public abstract class PlayerUnit
         return requiredExp;
     }
 
-
-    public static void printPlayerExp(PlayerUnit playerUnit) {
-        System.out.printf("\"%s\" the %s at level %d have %d\\%d exp, and me need %d for level %d%n", ((Nameable) playerUnit).getName(), playerUnit.getClassName(), playerUnit.getLevel(), playerUnit.getCurrentExp(), playerUnit.getRequiredExp(), playerUnit.getRequiredExp() - playerUnit.getCurrentExp(), (playerUnit.getLevel() + 1));
-
-    }
+    public abstract void printPlayerExp();
 
 
     @Override
     public void takeExp(int howMuchExp) {
-        System.out.println(this.name + " take " + howMuchExp + " experience");
+        System.out.println("\"" + getName() + "\" take " + howMuchExp + " experience");
         currentExp += howMuchExp;
         if (currentExp >= requiredExp) {
             level++;
+            increaseCharacteristicFroLvlUp();
             requiredExp += expForLvl(level);
         }
+    }
+
+    public void increaseCharacteristicFroLvlUp() {
+        if (getLevel() % 3 == 0) {
+            if (new Random().nextInt(1, 3) == 1) {
+                this.strength++;
+            } else this.agility++;
+        }
+        this.maxHP += 10;
+        currentHP = maxHP;
+    }
+
+    @Override
+    public String toString() {
+        return "\"" + getName() + "\" the " + getClassName() + " at level " + getLevel();
+    }
+
+    @Override
+    public void startFight(Fightable enemy) {
+
+    }
+
+    public void printCharInfo() {
+        System.out.println(
+                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+                        "Strength = " + getStrength() + ".\n" +
+                        "Agility = " + getAgility() + ".\n" +
+                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
+        );
     }
 }

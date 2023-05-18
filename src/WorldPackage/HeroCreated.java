@@ -1,13 +1,12 @@
 package WorldPackage;
 
 import MainClassesAndOther.PlayerUnit;
-import PlayerClases.Rogue;
 import PlayerClases.Warrior;
 
 import java.util.Scanner;
 
 public class HeroCreated {
-    public static PlayerUnit main() {
+    public static PlayerUnit create() {
 
         System.out.println("Hello! It's the little game for you. \nPlease choose your hero's class.");
         System.out.println("Enter \"1\" to select Warrior. \nEnter \"2\" to choose Rogue");
@@ -21,8 +20,8 @@ public class HeroCreated {
         do {
             String forScan = sc.nextLine();
             switch (forScan) {
-                case "1" -> selectedClass = 1;
-                case "2" -> selectedClass = 2;
+                case "1", "Warrior" -> selectedClass = 1;
+                case "2", "Rogue" -> selectedClass = 2;
                 default ->
                         System.out.println("Please choose your hero's class. Enter \"1\" to select Warrior, or enter \"2\" to choose Rogue");
             }
@@ -58,7 +57,7 @@ public class HeroCreated {
                 heroAgility += 6 - Integer.parseInt(forScan);
                 break;
             } else System.out.println("Enter from 0 to 6: ");
-        } while (Integer.parseInt(forScan) >= 0 && Integer.parseInt(forScan) <= 6);
+        } while (Integer.parseInt(forScan) < 0 || Integer.parseInt(forScan) > 6);
         System.out.printf("Your %s have %d strength and %d agility. \n", heroClass, heroStrength, heroAgility);
         //Name
         System.out.println("What your character's name?" + "\nEnter a name from 2-16 symbol: ");

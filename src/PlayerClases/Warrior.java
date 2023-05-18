@@ -3,6 +3,8 @@ package PlayerClases;
 import MainClassesAndOther.PlayerUnit;
 import UnitInterfaces.Fightable;
 
+import java.util.Random;
+
 public class Warrior extends PlayerUnit {
     private String name = "Unnamed hero";
     private String className = "Warrior";
@@ -19,12 +21,14 @@ public class Warrior extends PlayerUnit {
         this.strength = strength;
         this.agility = agility;
         this.maxHP = 50 + ((this.strength - 8) * 5);
+        this.currentHP = this.maxHP;
     }
 
     @Override
     public String getName() {
         return name;
     }
+
     @Override
     public String getClassName() {
         return className;
@@ -39,6 +43,8 @@ public class Warrior extends PlayerUnit {
     public void startFight(Fightable enemy) {
 
     }
+
+    @Override
     public void printCharInfo() {
         System.out.println(
                 "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
@@ -53,14 +59,17 @@ public class Warrior extends PlayerUnit {
     public int getStrength() {
         return strength;
     }
+
     @Override
     public int getAgility() {
         return agility;
     }
+
     @Override
     public int getMaxHP() {
         return maxHP;
     }
+
     @Override
     public int getCurrentHP() {
         return currentHP;
@@ -69,6 +78,24 @@ public class Warrior extends PlayerUnit {
     @Override
     public void takeDamage(int damage) {
         currentHP -= damage;
+    }
+
+    @Override
+    public void increaseCharacteristicFroLvlUp() {
+        if (getLevel() % 3 == 0) {
+            if (new Random().nextInt(1, 3) == 1 || getAgility() >= 20) {
+                this.strength++;
+            } else {
+                this.agility++;
+            }
+        }
+        this.maxHP += 10;
+        currentHP = maxHP;
+    }
+
+    public void printPlayerExp() {
+        System.out.printf("\"%s\" the %s at level %d have %d\\%d exp, and me need %d for level %d%n", getName(), getClassName(), getLevel(), getCurrentExp(), getRequiredExp(), getRequiredExp() - getCurrentExp(), (getLevel() + 1));
+
     }
 }
 
