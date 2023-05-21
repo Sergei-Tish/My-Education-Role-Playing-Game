@@ -39,21 +39,18 @@ public class Warrior extends PlayerUnit {
         return "\"" + getName() + "\" the " + getClassName() + " at level " + getLevel();
     }
 
-    @Override
-    public void startFight(Fightable enemy) {
 
-    }
 
-    @Override
-    public void printCharInfo() {
-        System.out.println(
-                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
-                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
-                        "Strength = " + getStrength() + ".\n" +
-                        "Agility = " + getAgility() + ".\n" +
-                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
-        );
-    }
+//    @Override
+//    public void printCharInfo() {
+//        System.out.println(
+//                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+//                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+//                        "Strength = " + getStrength() + ".\n" +
+//                        "Agility = " + getAgility() + ".\n" +
+//                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
+//        );
+//    }
 
     @Override
     public int getStrength() {

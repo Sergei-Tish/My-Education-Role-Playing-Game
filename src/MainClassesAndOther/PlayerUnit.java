@@ -1,6 +1,7 @@
 package MainClassesAndOther;
 
 import UnitInterfaces.*;
+import WorldPackage.Battle;
 
 import java.util.Random;
 
@@ -16,6 +17,7 @@ public abstract class PlayerUnit
     private int wisdom = 8;
     private int maxHP;
     private int currentHP = getMaxHP();
+    private int level = 1;
 
     @Override
     public String getName() {
@@ -25,8 +27,6 @@ public abstract class PlayerUnit
     public String getClassName() {
         return className;
     }
-
-    private int level = 1;
 
     @Override
     public int getGold() {
@@ -90,12 +90,12 @@ public abstract class PlayerUnit
 
     @Override
     public int getMaxHP() {
-        return 0;
+        return maxHP;
     }
 
     @Override
     public int getCurrentHP() {
-        return 0;
+        return currentHP;
     }
 
     @Override
@@ -123,7 +123,7 @@ public abstract class PlayerUnit
 
     private int currentExp = 0;
 
-    private int expForLvl(int atLevel) {
+    public int expForLvl(int atLevel) {
         int result = 100;
         for (int i = 1; i < atLevel; i++) {
             result = result * 3 / 2;
@@ -182,18 +182,20 @@ public abstract class PlayerUnit
         return "\"" + getName() + "\" the " + getClassName() + " at level " + getLevel();
     }
 
-    @Override
-    public void startFight(Fightable enemy) {
 
-    }
 
     public void printCharInfo() {
         System.out.println(
-                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
                         "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
-                        "Strength = " + getStrength() + ".\n" +
-                        "Agility = " + getAgility() + ".\n" +
-                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
+                        "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
+                        "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n" +
+                        "Experience = " + getCurrentExp() + "/" + getRequiredExp() + "."
         );
+    }
+
+    @Override
+    public void startFight(MonsterUnit enemy) {
+        Battle.startBattle(this, enemy);
     }
 }

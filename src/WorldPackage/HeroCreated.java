@@ -74,9 +74,10 @@ public class HeroCreated {
             default -> null;
 
         };
+
+
+        sc.close();
         return createdPlayerHero;
-
-
 
 
 
