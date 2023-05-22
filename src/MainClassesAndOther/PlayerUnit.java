@@ -100,7 +100,7 @@ public abstract class PlayerUnit
 
     @Override
     public void takeDamage(int damage) {
-
+        currentHP -= damage;
     }
 
     @Override
@@ -196,6 +196,6 @@ public abstract class PlayerUnit
 
     @Override
     public void startFight(MonsterUnit enemy) {
-        Battle.startBattle(this, enemy);
+        Battle.startTheBattle(this, enemy);
     }
 }

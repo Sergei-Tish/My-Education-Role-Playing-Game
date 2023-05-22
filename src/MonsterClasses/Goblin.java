@@ -23,46 +23,61 @@ public class Goblin extends MonsterUnit {
     private static int countOfGoblin = 0;
 
     public Goblin(PlayerUnit hero) {
+        super(hero);
         this.name = "goblin_#" + ++countOfGoblin;
-        this.strength = hero.getStrength() * 2 / 3;
-        this.agility = hero.getAgility() * 3 / 4;
+        this.strength = 1 + hero.getStrength() * 2 / 3;
+        this.agility = 1 + hero.getAgility() * 3 / 4;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));
         this.currentHP = this.maxHP;
-        this.level = hero.getLevel() * 5 / 6;
+        this.level = hero.getLevel() <= 1 ? 1 :
+                hero.getLevel() * 5 / 6;
         this.awardExp = hero.expForLvl(hero.getLevel()) / hero.getLevel() * 11 / 10;
         this.awardGold = this.level * (new Random().nextInt(10, 15));
     }
 
+    public void printMonsterInfo() {
+        System.out.println(
+                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+                        "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
+                        "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n"
+        );
+    }
 
     @Override
     public void startFight(Fightable enemy) {
 
     }
+    @Override
+    public void startFight(MonsterUnit enemy) {
+
+    }
 
     @Override
     public int getStrength() {
-        return 0;
+        return strength;
     }
 
     @Override
     public int getAgility() {
-        return 0;
+        return agility;
     }
 
     @Override
     public int getMaxHP() {
-        return 0;
+        return maxHP;
     }
 
     @Override
     public int getCurrentHP() {
-        return 0;
+        return currentHP;
     }
 
     @Override
     public void takeDamage(int damage) {
-
+        currentHP -= damage;
     }
+
 
     public String getName() {
         return name;

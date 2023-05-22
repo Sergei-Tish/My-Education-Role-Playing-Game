@@ -1,5 +1,6 @@
 package WorldPackage;
 
+import MainClassesAndOther.MonsterUnit;
 import MainClassesAndOther.PlayerUnit;
 import MonsterClasses.Goblin;
 import MonsterClasses.Skeleton;
@@ -15,27 +16,26 @@ public class TheGame {
         System.out.println("Hello " + playerHero + "! Let's begin your journey!");
         playerHero.printCharInfo();
 
-        Scanner sc = new Scanner(System.in);
-
         System.out.println("\nWhere do you want to go?\n" +
-                "1. To the trader\n" +
+                "1. To the trader.\n" +
                 "2. To the dark forest.\n" +
-                "3. the exit");
-        while (true) {
-            String scan = sc.nextLine();
-            if (scan.equals("1") || scan.toLowerCase().equals("trader")) {
+                "3. Exit the game.");
+
+        Scanner sc = new Scanner(System.in);
+        String nextScan = "";
+        do {
+            nextScan = sc.nextLine();
+            if ("1".equals(nextScan)) {
                 tradeWithTrader();
-            } else if (scan.equals("2") || scan.toLowerCase().equals("dark forest")) {
+                continue;
+            } else if ("2".equals(nextScan)) {
                 battleInDarkForest(playerHero);
-            } else if (scan.equals("3") || scan.toLowerCase().equals("exit")) {
+                continue;
+            } else if ("3".equals(nextScan)) {
                 break;
-            }
+            } else System.out.println("Please enter where do you want to go?");
 
-
-        }
-
-
-
+        } while (!"3".equals(nextScan));
 
     }
 
@@ -44,14 +44,18 @@ public class TheGame {
     }
 
     private static void battleInDarkForest(PlayerUnit playerHero) {
-        playerHero.startFight(
-                isaBoolean() ?
-                new Skeleton(playerHero) : 
-                new Goblin(playerHero));
+        playerHero.printCharInfo();
+        MonsterUnit monsterUnit = isaBoolean() ?
+                new Skeleton(playerHero) :
+                new Goblin(playerHero);
+        monsterUnit.printMonsterInfo();
+        Battle battle = Battle.startTheBattle(playerHero, monsterUnit);
+        System.out.println(battle); //ПРОИГРЫШ
 
-        System.out.println("\nWhere do you want to go?\n" + 
-                "1. Return to town\n" +
-                "2. Continue fighting");
+        System.out.println("\nWhere do you want to go?\n" +
+                "1. Return to town, for trade.\n" +
+                "2. Continue fighting.\n" +
+                "3. Exit the game.");
     }
 
     private static boolean isaBoolean() {

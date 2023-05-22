@@ -7,22 +7,25 @@ import java.util.Scanner;
 
 public class HeroCreated {
     public static PlayerUnit create() {
-
-        System.out.println("Hello! It's the little game for you. \nPlease choose your hero's class.");
-        System.out.println("Enter \"1\" to select Warrior. \nEnter \"2\" to choose Rogue");
-        Scanner sc = new Scanner(System.in);
         int selectedClass = 0;
         String heroClass = "";
         int heroStrength = 0;
         int heroAgility = 0;
         String heroName = "";
+
+        System.out.println("Hello! It's the little game for you. \nPlease choose your hero's class.");
+        System.out.println("Enter \"1\" to select Warrior. \nEnter \"2\" to choose Rogue");
+        Scanner sc = new Scanner(System.in);
+
 //        selectedClass
         do {
             String forScan = sc.nextLine();
             switch (forScan) {
                 case "1", "Warrior" -> selectedClass = 1;
                 case "2", "Rogue" -> selectedClass = 2;
-                default ->
+                case "" ->
+                        System.out.println("Please choose your hero's class. Enter \"1\" to select Warrior, or enter \"2\" to choose Rogue");
+                default  ->
                         System.out.println("Please choose your hero's class. Enter \"1\" to select Warrior, or enter \"2\" to choose Rogue");
             }
         } while (selectedClass != 1 && selectedClass != 2);
@@ -76,7 +79,6 @@ public class HeroCreated {
         };
 
 
-        sc.close();
         return createdPlayerHero;
 
 
