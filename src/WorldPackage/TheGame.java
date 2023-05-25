@@ -12,6 +12,7 @@ public class TheGame {
     public static void main(String[] args) {
 
         PlayerUnit playerHero = HeroCreated.create();
+        boolean heroIsLive = true;
 
         System.out.println("Hello " + playerHero + "! Let's begin your journey!");
         playerHero.printCharInfo();
@@ -29,33 +30,40 @@ public class TheGame {
                 tradeWithTrader();
                 continue;
             } else if ("2".equals(nextScan)) {
-                battleInDarkForest(playerHero);
+                heroIsLive = battleInDarkForest(playerHero);
+                if (!heroIsLive) break;
                 continue;
             } else if ("3".equals(nextScan)) {
                 break;
             } else System.out.println("Please enter where do you want to go?");
-
         } while (!"3".equals(nextScan));
-
     }
 
     private static void tradeWithTrader() {
-        System.out.println("The trader has not yet come to work");
+        System.out.println("The trader has not yet come to work".toUpperCase());
+        System.out.println("\nWhere do you want to go?\n" +
+                "1. Return to trader.\n" +
+                "2. To the dark forest.\n" +
+                "3. Exit the game.");
     }
 
-    private static void battleInDarkForest(PlayerUnit playerHero) {
-        playerHero.printCharInfo();
+    private static boolean battleInDarkForest(PlayerUnit playerHero) {
+//        playerHero.printCharInfo();
         MonsterUnit monsterUnit = isaBoolean() ?
                 new Skeleton(playerHero) :
                 new Goblin(playerHero);
         monsterUnit.printMonsterInfo();
         Battle battle = Battle.startTheBattle(playerHero, monsterUnit);
-        System.out.println(battle); //ПРОИГРЫШ
-
-        System.out.println("\nWhere do you want to go?\n" +
-                "1. Return to town, for trade.\n" +
-                "2. Continue fighting.\n" +
-                "3. Exit the game.");
+        if (battle.heroIsWin) {
+            System.out.println(battle.toStringWin());
+            System.out.println("\nWhere do you want to go?\n" +
+                    "1. Return to town, for trade.\n" +
+                    "2. Continue fighting.\n" +
+                    "3. Exit the game.");
+        } else {
+            System.out.println(battle.toStringLose()); //ПРОИГРЫШ
+        }
+        return battle.heroIsWin;
     }
 
     private static boolean isaBoolean() {

@@ -25,7 +25,7 @@ public class Skeleton extends MonsterUnit {
 
     public Skeleton(PlayerUnit hero) {
         super(hero);
-        this.name = "skeleton_#" + ++countOfSkeleton;
+        this.name = "skeleton_" + ++countOfSkeleton;
         this.strength = 1 + hero.getStrength() * 2 / 3;
         this.agility = 1 + hero.getAgility() * 3 / 4;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));

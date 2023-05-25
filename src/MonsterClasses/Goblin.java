@@ -24,7 +24,7 @@ public class Goblin extends MonsterUnit {
 
     public Goblin(PlayerUnit hero) {
         super(hero);
-        this.name = "goblin_#" + ++countOfGoblin;
+        this.name = "goblin_" + ++countOfGoblin;
         this.strength = 1 + hero.getStrength() * 2 / 3;
         this.agility = 1 + hero.getAgility() * 3 / 4;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));

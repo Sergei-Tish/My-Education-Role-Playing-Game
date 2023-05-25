@@ -20,7 +20,7 @@ public abstract class MonsterUnit extends FighterUnit {
     private int countOfMonster;
 
     public MonsterUnit(PlayerUnit hero) {
-        this.name = "goblin_#" + ++countOfMonster;
+        this.name = "monster_" + ++countOfMonster;
         this.strength = 1 + hero.getStrength() * 2 / 3;
         this.agility = 1 + hero.getAgility() * 3 / 4;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));
