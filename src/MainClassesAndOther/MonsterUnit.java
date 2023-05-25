@@ -35,8 +35,7 @@ public abstract class MonsterUnit extends FighterUnit {
 
     public void printMonsterInfo() {
         System.out.println(
-                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
-                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+                "You have met the monster \"" + getName() + "\" level " + getLevel() + " " + getClassName() + " with " + getMaxHP() + "HP.\n" +
                         "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
                         "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n"
         );

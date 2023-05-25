@@ -11,6 +11,7 @@ public class Battle {
     int countMonsterDamage = 0;
     int countMonsterMiss = 0;
     boolean heroIsWin = true;
+    int heroCurrentHP = 0;
     PlayerUnit playerUnit;
     MonsterUnit monsterUnit;
 
@@ -26,23 +27,23 @@ public class Battle {
         this.playerUnit = playerHero;
         this.monsterUnit = monster;
         this.heroIsWin = heroIsWin;
+        this.heroCurrentHP = playerHero.getCurrentHP();
     }
     public String toStringWin() {
-        return "The battle results: \n" +
-                "The " + playerUnit.getClassName() + " \"" + playerUnit.getName() + "\" hits " + countHeroHit + " times and deals " + countHeroDamage + " damage.\n" +
-                "The " + monsterUnit.getClassName() + " hits " + countMonsterHit + " times and deals " + countMonsterDamage + " damage.\n" +
-                "\"" + playerUnit.getName() + "\" take " + monsterUnit.getAwardExp() + " exp, and " + monsterUnit.getAwardGold() + " gold.\n" +
-                "Hit points = " + playerUnit.getCurrentHP() + "/" + playerUnit.getMaxHP() + ".\n" +
-                "Experience = " + playerUnit.getCurrentExp() + "/" + playerUnit.getRequiredExp() + ".";
+        return resultBattle() + "\n" +
+                "\"" + playerUnit.getName() + "\" take " + monsterUnit.getAwardExp() + " exp, and " + monsterUnit.getAwardGold() + " gold.";
     }
 
     public String toStringLose() {
-        return "The battle results: \n" +
-                "The " + playerUnit.getClassName() + " \"" + playerUnit.getName() + "\" hits " + countHeroHit + " times and deals " + countHeroDamage + " damage. Missed " + countHeroMiss + " times.\n" +
-                "The " + monsterUnit.getClassName() + " hits " + countMonsterHit + " times and deals " + countMonsterDamage + " damage. Missed " + countMonsterMiss + " times.\n" +
-                "Hit points = " + playerUnit.getCurrentHP() + "/" + playerUnit.getMaxHP() + ".\n" +
-                "Experience = " + playerUnit.getCurrentExp() + "/" + playerUnit.getRequiredExp() + ".\n" +
+         return resultBattle() + "\n" +
                 "\"" + playerUnit.getName().toUpperCase() + "\" IS DEAD.";
+    }
+    private String resultBattle() {
+        return "The battle results: \n" +
+                "The " + playerUnit.getClassName() + " \"" + playerUnit.getName() + "\" hits " + countHeroHit + " times and deals " + countHeroDamage + " damage. " +
+                "Missed " + countHeroMiss + " times.\n" +
+                "The " + monsterUnit.getClassName() + " hits " + countMonsterHit + " times and deals " + countMonsterDamage + " damage. " +
+                "Missed " + countMonsterMiss + " times.";
     }
 
 
@@ -67,7 +68,6 @@ public class Battle {
                 monster.takeDamage(hitDamage);
                 if (monster.getCurrentHP() <= 0) {
                     heroIsWin = true;
-                    playerHero.takeExp(monster.getAwardExp());
                     playerHero.plusGold(monster.getAwardGold());
                     break;
                 }

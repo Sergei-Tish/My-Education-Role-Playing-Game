@@ -8,6 +8,7 @@ import java.util.Random;
 public abstract class PlayerUnit
         extends FighterUnit
         implements Playerable, Experienceable, Nameable {
+    public boolean heroIsLive = true;
 
     String name = "Player";
     String className = "PlayerUnit";
@@ -120,8 +121,33 @@ public abstract class PlayerUnit
         else takeExp(100);
         increaseCharacteristicFroLvlUp();
     }
+    public void increaseLevel() {
+        level++;
+        System.out.println("\"" + getName() + "\" increase level to " + getLevel() + ". Your hero is fully healed.");
+    }
 
     private int currentExp = 0;
+
+    @Override
+    public void takeExp(int howMuchExp) {
+//        System.out.println("\"" + getName() + "\" take " + howMuchExp + " experience");
+        currentExp += howMuchExp;
+        if (currentExp >= requiredExp) {
+            increaseLevel();
+            increaseCharacteristicFroLvlUp();
+            requiredExp += expForLvl(level);
+        }
+    }
+
+    public void increaseCharacteristicFroLvlUp() {
+        if (getLevel() % 3 == 0) {
+            if (new Random().nextInt(1, 3) == 1) {
+                this.strength++;
+            } else this.agility++;
+        }
+        this.maxHP += 10;
+        currentHP = maxHP;
+    }
 
     public int expForLvl(int atLevel) {
         int result = 100;
@@ -156,26 +182,7 @@ public abstract class PlayerUnit
     public abstract void printPlayerExp();
 
 
-    @Override
-    public void takeExp(int howMuchExp) {
-        System.out.println("\"" + getName() + "\" take " + howMuchExp + " experience");
-        currentExp += howMuchExp;
-        if (currentExp >= requiredExp) {
-            level++;
-            increaseCharacteristicFroLvlUp();
-            requiredExp += expForLvl(level);
-        }
-    }
 
-    public void increaseCharacteristicFroLvlUp() {
-        if (getLevel() % 3 == 0) {
-            if (new Random().nextInt(1, 3) == 1) {
-                this.strength++;
-            } else this.agility++;
-        }
-        this.maxHP += 10;
-        currentHP = maxHP;
-    }
 
     @Override
     public String toString() {
@@ -190,7 +197,7 @@ public abstract class PlayerUnit
                         "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
                         "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
                         "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n" +
-                        "Experience = " + getCurrentExp() + "/" + getRequiredExp() + "."
+                        "Experience = " + getCurrentExp() + "/" + getRequiredExp() + ". Need " + (getRequiredExp()-getCurrentExp()) + " exp to level " + (getLevel()+1) + "."
         );
     }
 

@@ -25,8 +25,8 @@ public class Goblin extends MonsterUnit {
     public Goblin(PlayerUnit hero) {
         super(hero);
         this.name = "goblin_" + ++countOfGoblin;
-        this.strength = 1 + hero.getStrength() * 2 / 3;
-        this.agility = 1 + hero.getAgility() * 3 / 4;
+        this.strength = 1 + hero.getStrength() * 4 / 9;
+        this.agility = 1 + hero.getAgility() * 7 / 9;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));
         this.currentHP = this.maxHP;
         this.level = hero.getLevel() <= 1 ? 1 :
@@ -35,14 +35,14 @@ public class Goblin extends MonsterUnit {
         this.awardGold = this.level * (new Random().nextInt(10, 15));
     }
 
-    public void printMonsterInfo() {
-        System.out.println(
-                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
-                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
-                        "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
-                        "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n"
-        );
-    }
+//    public void printMonsterInfo() {
+//        System.out.println(
+//                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
+//                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
+//                        "Strength = " + getStrength() + ", hit damage = " + getHitDamage() + ".\n" +
+//                        "Agility = " + getAgility() + ", hit chance = " + getChanceToHit() + ".\n"
+//        );
+//    }
 
     @Override
     public void startFight(Fightable enemy) {

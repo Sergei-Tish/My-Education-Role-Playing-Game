@@ -34,13 +34,13 @@ public class HeroCreated {
         switch (selectedClass) {
             case 1 -> {
                 heroClass = "Warrior";
-                heroStrength = 12;
+                heroStrength = 14;
                 heroAgility = 10;
             }
             case 2 -> {
                 heroClass = "Rogue";
                 heroStrength = 10;
-                heroAgility = 12;
+                heroAgility = 15;
             }
             default -> {
                 heroClass = "AnotherClass";
@@ -48,7 +48,8 @@ public class HeroCreated {
                 heroAgility = 8;
             }
         }
-
+        String forScan;
+/*
         System.out.printf("Your %s have %d strength and %d agility. You have 6 more characteristic points. \n" +
                 "How many points to increase the strength? Enter from 0 to 6: \n", heroClass, heroStrength, heroAgility);
 //      bonus strength and agility
@@ -61,6 +62,7 @@ public class HeroCreated {
                 break;
             } else System.out.println("Enter from 0 to 6: ");
         } while (Integer.parseInt(forScan) < 0 || Integer.parseInt(forScan) > 6);
+*/
         System.out.printf("Your %s have %d strength and %d agility. \n", heroClass, heroStrength, heroAgility);
         //Name
         System.out.println("What your character's name?" + "\nEnter a name from 2-16 symbol: ");
