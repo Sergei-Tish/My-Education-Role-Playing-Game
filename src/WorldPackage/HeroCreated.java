@@ -49,6 +49,10 @@ public class HeroCreated {
             }
         }
         String forScan;
+
+        /**
+         * настройка характеристик при создании
+         * */
 /*
         System.out.printf("Your %s have %d strength and %d agility. You have 6 more characteristic points. \n" +
                 "How many points to increase the strength? Enter from 0 to 6: \n", heroClass, heroStrength, heroAgility);
@@ -79,16 +83,7 @@ public class HeroCreated {
             default -> null;
 
         };
-
-
         return createdPlayerHero;
 
-
-
-
-//        Warrior warrior = new Warrior("Boguno", 4, 2);
-//        System.out.println("ВОИН.toString() выводит: " + warrior);
-//        warrior.lvlUp(5);
-//        System.out.println("ВОИН.toString() выводит: " + warrior);
     }
 }

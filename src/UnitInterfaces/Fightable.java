@@ -32,5 +32,4 @@ public interface Fightable {
         return chance > 50;
     }
 
-    void startFight(MonsterUnit enemy);
 }

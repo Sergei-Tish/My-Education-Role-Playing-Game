@@ -1,5 +1,7 @@
 package UnitInterfaces;
 
+import MainClassesAndOther.PlayerUnit;
+
 public interface Tradeable {
-    void trade(Tradeable tradeTarget);
+    void trade(PlayerUnit tradeTarget);
 }

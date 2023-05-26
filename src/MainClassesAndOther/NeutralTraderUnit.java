@@ -5,7 +5,7 @@ import UnitInterfaces.Tradeable;
 public abstract class NeutralTraderUnit extends Unit implements Tradeable {
 
     @Override
-    public void trade(Tradeable tradeTarget) {
+    public void trade(PlayerUnit tradeTarget) {
 
     }
 }

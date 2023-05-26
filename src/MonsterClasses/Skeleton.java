@@ -26,7 +26,7 @@ public class Skeleton extends MonsterUnit {
     public Skeleton(PlayerUnit hero) {
         super(hero);
         this.name = "skeleton_" + ++countOfSkeleton;
-        this.strength = 1 + hero.getStrength() * 5 / 9;
+        this.strength = 1 + hero.getStrength() * 4 / 9;
         this.agility = 1 + hero.getAgility() * 6 / 9;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));
         this.currentHP = this.maxHP;
@@ -35,20 +35,7 @@ public class Skeleton extends MonsterUnit {
         this.awardExp = hero.expForLvl(hero.getLevel()) / hero.getLevel();
         this.awardGold = this.level * (new Random().nextInt(8, 13));
     }
-/*
-    public Skeleton(PlayerUnit hero, int forTest) {
-        super(hero);
-        this.name = "skeleton_#" + ++countOfSkeleton;
-        this.strength = 1 + (hero.getStrength() * 2 / 3);         System.out.println(1 + (hero.getStrength() * 2 / 3));
-        this.agility = 1 + (hero.getAgility() * 3 / 4);        System.out.println(1 + (hero.getAgility() * 3 / 4));
-        this.maxHP = this.strength * (new Random().nextInt(8, 13));        System.out.println(this.strength * (new Random().nextInt(8, 13)));
-        this.currentHP = this.maxHP;
-        this.level = hero.getLevel() * 5 / 6;
-        this.awardExp = hero.expForLvl(hero.getLevel()) / hero.getLevel();
-        this.awardGold = this.level * (new Random().nextInt(8, 13));
-    }
-*/
-
+//    @Override
 //    public void printMonsterInfo() {
 //        System.out.println(
 //                "Character \"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
@@ -61,11 +48,6 @@ public class Skeleton extends MonsterUnit {
 
     @Override
     public void startFight(Fightable enemy) {
-
-    }
-
-    @Override
-    public void startFight(MonsterUnit enemy) {
 
     }
 

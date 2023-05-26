@@ -9,10 +9,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class TheGame {
+    public static PlayerUnit playerHero;
+
     public static void main(String[] args) {
         while (true) {
 
-            PlayerUnit playerHero = HeroCreated.create();
+            playerHero = HeroCreated.create();
 
             System.out.println("Hello " + playerHero + "! Let's begin your journey!");
             playerHero.printCharInfo();
@@ -73,32 +75,59 @@ public class TheGame {
                 "3. Exit the game.");
     }
 
+    public static MonsterUnit monsterUnit;
+
+    //    private static boolean oldBattleInDarkForest(PlayerUnit playerHero) {
+////        playerHero.printCharInfo();
+//        MonsterUnit monsterUnit = isaBoolean() ?
+//                new Skeleton(playerHero) :
+//                new Goblin(playerHero);
+//        monsterUnit.printMonsterInfo();
+//        OldBattle oldBattle = OldBattle.startBattle(playerHero, monsterUnit);
+//        if (oldBattle.heroIsWin) {
+//            System.out.println(oldBattle.toStringWin());
+//            playerHero.takeExp(monsterUnit.getAwardExp());
+//            printStatsHero(playerHero);
+//
+//            System.out.println("\nWhere do you want to go?\n" +
+//                    "1. Return to town, for trade.\n" +
+//                    "2. Continue fighting.\n" +
+//                    "3. Exit the game.");
+//        } else {
+//            System.out.println(oldBattle.toStringLose()); //ПРОИГРЫШ
+//        }
+//        return oldBattle.heroIsWin;
+//    }
     private static boolean battleInDarkForest(PlayerUnit playerHero) {
 //        playerHero.printCharInfo();
-        MonsterUnit monsterUnit = isaBoolean() ?
+        monsterUnit = isaBoolean() ?
                 new Skeleton(playerHero) :
                 new Goblin(playerHero);
         monsterUnit.printMonsterInfo();
-        Battle battle = Battle.startTheBattle(playerHero, monsterUnit);
-        if (battle.heroIsWin) {
-            System.out.println(battle.toStringWin());
+        Thread threadBattle = new Battle();
+        threadBattle.start();
+        try {
+            threadBattle.join();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        if (playerHero.heroIsLive) {
             playerHero.takeExp(monsterUnit.getAwardExp());
-            printStatsHero(playerHero);
 
+            printStatsHero(playerHero);
             System.out.println("\nWhere do you want to go?\n" +
                     "1. Return to town, for trade.\n" +
                     "2. Continue fighting.\n" +
                     "3. Exit the game.");
-        } else {
-            System.out.println(battle.toStringLose()); //ПРОИГРЫШ
         }
-        return battle.heroIsWin;
+        return playerHero.heroIsLive;
     }
+
 
     private static void printStatsHero(PlayerUnit playerHero) {
         System.out.println("Your stats: \n" +
                 "Hit points = " + playerHero.getCurrentHP() + "/" + playerHero.getMaxHP() + ".\n" +
-                "Experience = " + playerHero.getCurrentExp() + "/" + playerHero.getRequiredExp() + ". Need " + (playerHero.getRequiredExp()-playerHero.getCurrentExp()) + " exp to level " + (playerHero.getLevel()+1) + ".");
+                "Experience = " + playerHero.getCurrentExp() + "/" + playerHero.getRequiredExp() + ". Need " + (playerHero.getRequiredExp() - playerHero.getCurrentExp()) + " exp to level " + (playerHero.getLevel() + 1) + ".");
     }
 
     private static boolean isaBoolean() {

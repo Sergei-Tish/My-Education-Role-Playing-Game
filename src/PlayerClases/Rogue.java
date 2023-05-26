@@ -40,17 +40,6 @@ public class Rogue extends PlayerUnit {
     }
 
 
-
-//    public void printCharInfo() {
-//        System.out.println(
-//                "\"" + getName() + "\" level " + getLevel() + " " + getClassName() + ".\n" +
-//                        "Hit points = " + getCurrentHP() + "/" + getMaxHP() + ".\n" +
-//                        "Strength = " + getStrength() + ".\n" +
-//                        "Agility = " + getAgility() + ".\n" +
-//                        "Experience = " + getCurrentExp() + "/" + getRequiredExp()
-//        );
-//    }
-
     @Override
     public int getStrength() {
         return strength;

@@ -25,7 +25,7 @@ public class Goblin extends MonsterUnit {
     public Goblin(PlayerUnit hero) {
         super(hero);
         this.name = "goblin_" + ++countOfGoblin;
-        this.strength = 1 + hero.getStrength() * 4 / 9;
+        this.strength = 1 + hero.getStrength() * 3 / 9;
         this.agility = 1 + hero.getAgility() * 7 / 9;
         this.maxHP = this.strength * (new Random().nextInt(8, 13));
         this.currentHP = this.maxHP;
@@ -48,10 +48,7 @@ public class Goblin extends MonsterUnit {
     public void startFight(Fightable enemy) {
 
     }
-    @Override
-    public void startFight(MonsterUnit enemy) {
 
-    }
 
     @Override
     public int getStrength() {
