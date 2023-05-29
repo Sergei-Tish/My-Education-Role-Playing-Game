@@ -62,6 +62,8 @@ public class TheGame {
                 System.out.println("You have " + playerHero.getGold() + " gold.");
             } else if ("Stats".equalsIgnoreCase(nextScan)) {
                 printStatsHero(playerHero);
+            } else if ("info".equalsIgnoreCase(nextScan)) {
+                playerHero.printCharInfo();
             } else System.out.println("Please enter where do you want to go?");
         } while (!"3".equals(nextScan));
     }

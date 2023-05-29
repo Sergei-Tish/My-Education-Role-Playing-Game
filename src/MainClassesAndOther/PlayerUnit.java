@@ -178,12 +178,6 @@ public abstract class PlayerUnit
         return requiredExp;
     }
 
-    public void printPlayerExp() {
-        System.out.printf("\"%s\" the %s at level %d have %d\\%d exp, and me need %d for level %d%n", getName(), getClassName(), getLevel(), getCurrentExp(), getRequiredExp(), getRequiredExp() - getCurrentExp(), (getLevel() + 1));
-    }
-
-
-
     @Override
     public String toString() {
         return "\"" + getName() + "\" the " + getClassName() + " at level " + getLevel();
